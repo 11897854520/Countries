@@ -16,13 +16,13 @@ public class Translator {
                         " Chrome / 100.0.0.0 Safari / 537.36").referrer("http://www.google.com").get();
     }
 
-    public static String getTranslate(String word) {
+    public static String translate(String word) {
         if (word != null) {
             try {
                 String url = "https://www.translate.ru/перевод/английский-русский/" +
                         word.replaceAll("/[^A-z\\s'-']/", "");
                 Elements elements = document(url).getElementsByClass("result_only sayWord");
-                List<String> results = elements.stream().map(Element::ownText).collect(Collectors.toList());
+                List<String> results = elements.stream().map(Element::ownText).toList();
                 String result = results.size() != 0 ? results.get(0) : "";
                 if (!result.isEmpty()) {
                     return result;
